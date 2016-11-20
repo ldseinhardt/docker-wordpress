@@ -1,0 +1,22 @@
+services:
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - "8000:80"
+    restart: always
+    env_file:
+      - .env
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./db:/var/lib/mysql
+    restart: always
+    env_file:
+      - .env
+
+version: '2'
